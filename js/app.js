@@ -2,7 +2,7 @@
 // Set up API and endpoints
 
 document.addEventListener('DOMContentLoaded', () => {
-    const apiKey = 'USER_API_KEY'; // User need to put their own api here 
+    const apiKey = '5f6d29327e34e5916638f52aa030f5d5'; // User need to put their own api here 
     const weatherEndpoint = 'https://api.openweathermap.org/data/2.5/weather';
     const forecastEndpoint = 'https://api.openweathermap.org/data/2.5/forecast';
 
@@ -23,34 +23,36 @@ document.addEventListener('DOMContentLoaded', () => {
 
             //fetch forecast data for the input location
             const forecastResponse = await fetch(`${forecastEndpoint}?q=${locationInput}&appid=${apiKey}&units=metric`);
-            const weatherData = await forecastResponse.json();
+            const forecastData = await forecastResponse.json();
 
             // Display location name
             document.getElementById('location').textContent = weatherData.name;
 
             // Display currrent weather of the location
-            document.getElementById('current-weather').innerHTML = `${weatherData.main.temp}&deg;C, ${weatherData.weather[0].description}`;
+            document.getElementById('currentWeather').innerHTML = `${weatherData.main.temp}&deg;C, ${weatherData.weather[0].description}`;
 
             // Display forecast 
-            const forcastContainer = document.getElementById('forecast');
-            forcastContainer.innerHTML = '';
-
+            const forecastContainer = document.getElementById('forecast');
+            forecastContainer.innerHTML = '';
+                // Use loop to  iterate over the 5-day forecast data and displays each day's information in the HTML
             for (let i = 0; i < 5; i++) {
                 const forecastItem = forecastData.list[i];
                 const date = new Date(forecastItem.dt * 1000);
                 const day = date.toLocaleDateString('en-US', { weekday: 'short'});
                 const temperature = forecastItem.main.temp;
 
-                forcastContainer.innerHTML += `
+                forecastContainer.innerHTML += `
                     <div>
                         <div>${day}</div>
                         <div>${temperature}&deg;C</div>
                     </div>
                 `;
-            } else {
+                
+            } 
+        } else {
                 // alert user if no location enter
                 alert('Please enter a location.');
             }
-        }
+        })
     });
-});
+;
