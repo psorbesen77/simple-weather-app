@@ -18,8 +18,39 @@ document.addEventListener('DOMContentLoaded', () => {
         // Check if the there any value entered in the box
         if (locationInput) {
             // fetch current weather data for the input location
-            const weatherResponse = await fetch('${weatherEndpoint}?q=${locationInput}&appid=${apiKey}&units=metric');
+            const weatherResponse = await fetch(`${weatherEndpoint}?q=${locationInput}&appid=${apiKey}&units=metric`);
             const weatherData = await weatherResponse.json();
+
+            //fetch forecast data for the input location
+            const forecastResponse = await fetch(`${forecastEndpoint}?q=${locationInput}&appid=${apiKey}&units=metric`);
+            const weatherData = await forecastResponse.json();
+
+            // Display location name
+            document.getElementById('location').textContent = weatherData.name;
+
+            // Display currrent weather of the location
+            document.getElementById('current-weather').innerHTML = `${weatherData.main.temp}&deg;C, ${weatherData.weather[0].description}`;
+
+            // Display forecast 
+            const forcastContainer = document.getElementById('forecast');
+            forcastContainer.innerHTML = '';
+
+            for (let i = 0; i < 5; i++) {
+                const forecastItem = forecastData.list[i];
+                const date = new Date(forecastItem.dt * 1000);
+                const day = date.toLocaleDateString('en-US', { weekday: 'short'});
+                const temperature = forecastItem.main.temp;
+
+                forcastContainer.innerHTML += `
+                    <div>
+                        <div>${day}</div>
+                        <div>${temperature}&deg;C</div>
+                    </div>
+                `;
+            } else {
+                // alert user if no location enter
+                alert('Please enter a location.');
+            }
         }
-    })
-})
+    });
+});
