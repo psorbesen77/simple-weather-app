@@ -2,7 +2,7 @@
 // Set up API and endpoints
 
 document.addEventListener('DOMContentLoaded', () => {
-    const apiKey = '5f6d29327e34e5916638f52aa030f5d5'; // User need to put their own api here 
+    const apiKey = 'USER_API_KEY5'; // User need to put their own api here 
     const weatherEndpoint = 'https://api.openweathermap.org/data/2.5/weather';
     const forecastEndpoint = 'https://api.openweathermap.org/data/2.5/forecast';
 
