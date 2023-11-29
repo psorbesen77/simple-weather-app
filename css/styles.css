@@ -19,3 +19,20 @@ body {
     box-shadow: 0 0 20px rgba(0, 0, 0, 1);
     border-radius: 15px;
 }
+
+/* create IDs to be called on */
+
+#location {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+}
+
+#currentWeather {
+    font-size: 1.5em;
+    margin-bottom: 20px;
+}
+
+#forecast {
+    display: flex;
+    justify-content: space-around;
+}
