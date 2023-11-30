@@ -2,7 +2,7 @@
 // Set up API and endpoints
 
 document.addEventListener('DOMContentLoaded', () => {
-    const apiKey = 'USER_API_KEY5'; // User need to put their own api here 
+    const apiKey = 'USER_API_KEY'; // User need to put their own api here 
     const weatherEndpoint = 'https://api.openweathermap.org/data/2.5/weather';
     const forecastEndpoint = 'https://api.openweathermap.org/data/2.5/forecast';
 
@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
             for (let i = 0; i < 5; i++) {
                 const forecastItem = forecastData.list[i];
                 const date = new Date(forecastItem.dt * 1000);
-                const day = date.toLocaleDateString('en-US', { weekday: 'short'});
+                const day = date.toLocaleDateString('en-US', { weekday: 'short'}).slice(0,3);
                 const temperature = forecastItem.main.temp;
 
                 forecastContainer.innerHTML += `
