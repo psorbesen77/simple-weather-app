@@ -37,13 +37,18 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Use loop to  iterate over the 5-day forecast data and displays each day's information in the HTML
             for (let i = 0; i < 5; i++) {
                 const forecastItem = forecastData.list[i];
+
+                // Log the forecastItem to inspect its contents
+                console.log('Forecast Item:', forecastItem);
+                
+
                 const date = new Date(forecastItem.dt * 1000);
-                const day = date.toLocaleDateString('en-US', { weekday: 'short'}).slice(0,3);
+                const time = date.toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric' });
                 const temperature = forecastItem.main.temp;
 
                 forecastContainer.innerHTML += `
                     <div>
-                        <div>${day}</div>
+                        <div>${time}</div>
                         <div>${temperature}&deg;C</div>
                     </div>
                 `;
